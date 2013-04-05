@@ -1,6 +1,20 @@
-﻿namespace DemoApplication.Models.Components
+﻿#region credits
+// ***********************************************************************
+// Assembly	: DemoApplication
+// Author	: Rod Johnson
+// Created	: 03-07-2013
+// 
+// Last Modified By : Rod Johnson
+// Last Modified On : 03-28-2013
+// ***********************************************************************
+#endregion
+namespace DemoApplication.Models.Components
 {
-    using Attributes;
+    #region
+
+    using Metadata.Attributes;
+
+    #endregion
 
     public class SampleVideoModel
     {

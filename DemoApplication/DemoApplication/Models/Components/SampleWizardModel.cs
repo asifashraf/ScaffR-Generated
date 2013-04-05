@@ -1,7 +1,21 @@
-﻿namespace DemoApplication.Models.Components
+﻿#region credits
+// ***********************************************************************
+// Assembly	: DemoApplication
+// Author	: Rod Johnson
+// Created	: 03-04-2013
+// 
+// Last Modified By : Rod Johnson
+// Last Modified On : 03-28-2013
+// ***********************************************************************
+#endregion
+namespace DemoApplication.Models.Components
 {
+    #region
+
     using System.ComponentModel.DataAnnotations;
-    using Attributes;
+    using Metadata.Attributes;
+
+    #endregion
 
     [Wizard]
     public class SampleWizardModel

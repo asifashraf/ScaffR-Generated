@@ -1,0 +1,135 @@
+@{
+    ViewBag.Title = "My Dashboard";
+    ViewBag.ShowMainMenu = true;
+}
+
+@section LeftColumn{
+    <ul class="nav nav-tabs nav-stacked">
+
+        <li>
+            <a href="@Url.Action("Profile", "Account")">User Account</a>
+        </li>
+        <li>
+            <a href="@Url.Action("Settings", "Account")">Change Password</a>
+        </li>
+    </ul>
+}
+
+<h4>User Signups</h4>
+<table class="table table-bordered">
+    <tr>
+        <td width="20%">Today</td>
+        <td>
+            <div class="progress progress-warning">
+                <div class="bar" style="width: 25%;">
+                    &nbsp;
+									
+                </div>
+            </div>
+        </td>
+        <td width="10%">15</td>
+    </tr>
+    <tr>
+        <td>This Week</td>
+        <td>
+            <div class="progress progress-danger">
+                <div class="bar" style="width: 45%;">
+                    &nbsp;
+									
+                </div>
+            </div>
+        </td>
+        <td>45</td>
+    </tr>
+    <tr>
+        <td>This Month</td>
+        <td>
+            <div class="progress">
+                <div class="bar" style="width: 65%;">
+                    &nbsp;
+									
+                </div>
+            </div>
+        </td>
+        <td>65</td>
+    </tr>
+    <tr>
+        <td>Total Signups</td>
+        <td>
+            <div class="progress progress-success">
+                <div class="bar" style="width: 95%;">
+                    &nbsp;
+									
+                </div>
+            </div>
+        </td>
+        <td>95</td>
+    </tr>
+</table>
+<br/>
+<h4>User Widgets</h4>
+<div class="sortableContent">
+
+        <div class="row-fluid">
+            <div class="span4 column">
+                <div class="widget" id="sWidget_1">
+                    <div class="head">
+                        <div class="icon"><i class="icosg-gridview"></i></div>
+                        <h2>Sample block</h2>                        
+                    </div>
+                    <div class="block">
+                        Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia
+                    </div>
+                </div>                
+                <div class="widget" id="sWidget_2">
+                    <div class="head dark">
+                        <div class="icon"><i class="icos-gridview"></i></div>
+                        <h2>Sample block</h2>                      
+                    </div>
+                    <div class="block">
+                        Ut quis lectus turpis, a pretium massa. Aliquam diam libero, ullamcorper sit amet consequat ut, rutrum a dui. Morbi hendrerit tempus lectus, non euismod mauris tempus sit amet. Curabitur sed rhoncus nibh. Maecenas fringilla ornare lorem sit amet egestas. Donec sit amet nunc diam. Cras urna dui, vestibulum feugiat luctus eu, semper vel diam. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+                    </div>
+                </div>                
+            </div>
+            <div class="span4 column">
+                <div class="widget" id="sWidget_3">
+                    <div class="head dark">
+                        <div class="icon"><i class="icos-gridview"></i></div>
+                        <h2>Sample block</h2>                   
+                    </div>
+                    <div class="block">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam leo ligula, aliquam in ullamcorper sed, adipiscing vitae ligula. Morbi sed mi ipsum. Vivamus laoreet, ante eget bibendum accumsan
+                    </div>
+                </div>                
+                <div class="widget" id="sWidget_4">
+                    <div class="head simple">                        
+                        <h2>Sample block</h2>
+                    </div>
+                    <div class="block">
+                        Sed leo orci, placerat consectetur gravida a, varius in purus. Cras scelerisque lorem a lorem rutrum molestie. Nulla tincidunt diam at orci ultrices eleifend. Vestibulum metus elit, mollis sed blandit non, adipiscing ornare magna. Suspendisse eget tincidunt enim. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec vel lobortis felis.
+                    </div>
+                </div>                 
+            </div>
+            <div class="span4 column">
+                <div class="widget" id="sWidget_5">
+                    <div class="head">
+                        <div class="icon"><i class="icosg-gridview"></i></div>
+                        <h2>Sample block</h2>                      
+                    </div>
+                    <div class="block">
+                        Fusce et justo risus, sed suscipit sapien. Aenean ornare pharetra massa, ac scelerisque ligula venenatis sed. Aliquam at sapien quis magna imperdiet placerat. Ut eros orci, luctus nec tincidunt venenatis, interdum nec augue. Ut nibh tellus, sollicitudin nec aliquam ut
+                    </div>
+                </div>                
+                <div class="widget" id="sWidget_6">
+                    <div class="head dark">
+                        <div class="icon"><i class="icos-gridview"></i></div>
+                        <h2>Sample block</h2>                     
+                    </div>
+                    <div class="block">
+                        Morbi ut ligula nec eros rutrum congue quis sed diam. Sed venenatis purus ac diam scelerisque bibendum. Vestibulum euismod, nulla ut malesuada pretium, massa dolor suscipit ligula, nec laoreet metus nisl vel urna. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Suspendisse vestibulum pharetra interdum. Vivamus bibendum, lectus tincidunt viverra feugiat, neque risus auctor felis, ut convallis ipsum ipsum at metus.
+                    </div>
+                </div>                
+            </div>
+        </div>
+        
+    </div>  

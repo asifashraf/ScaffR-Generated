@@ -1,4 +1,3 @@
-@using DemoApplication.Extensions.Html
 @{
     Bundles.Reference("content/less/site.less");
     Bundles.Reference("scripts/lib");
@@ -19,7 +18,7 @@
     @Bundles.RenderStylesheets()
     @Bundles.RenderScripts("head")
 </head>
-<body>
+<body class="@ViewBag.BodyClass">
     @Html.Partial("_Modal")
     @RenderBody()
 

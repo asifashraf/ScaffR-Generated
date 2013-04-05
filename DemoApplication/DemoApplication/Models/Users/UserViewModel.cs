@@ -1,9 +1,25 @@
-﻿namespace DemoApplication.Models.Users
+﻿#region credits
+// ***********************************************************************
+// Assembly	: DemoApplication
+// Author	: Rod Johnson
+// Created	: 02-24-2013
+// 
+// Last Modified By : Rod Johnson
+// Last Modified On : 03-28-2013
+// ***********************************************************************
+#endregion
+namespace DemoApplication.Models.Users
 {
+    #region
+
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
-    using Attributes;
+    using Core.Model;
+    using Metadata.Attributes;
+
+    #endregion
 
     [DisplayColumn("Username")]
     public partial class UserViewModel
@@ -42,16 +58,30 @@
         public virtual DateTime? LastLoginDate { get; set; }
 
         [Required]
-        [Textbox(DataType.EmailAddress)]
+        [EmailTextbox]
+        [Display(Name = "Email Address")]
         public virtual string Email { get; set; }
 
-        [Textbox(IsMultiline = true)]
+        [CKEditor(ToolBar = CKEditorToolbar.Full)]
         public virtual string Comment { get; set; }
 
-        [Display(Name = "Approved")]
-        public virtual bool IsApproved { get; set; }
+        [Display(Name = "Is Account Verified?")]
+        public virtual bool IsAccountVerified { get; set; }
 
-        [Display(Name = "Locked Out")]
-        public virtual bool IsLockedOut { get; set; }
+        [Display(Name = "Can User Login?")]
+        public virtual bool IsLoginAllowed { get; set; }
+
+        [Display(Name = "Is Account Closed?")]
+        public virtual bool IsAccountClosed { get; set; }
+    }
+
+    public class UserHistory : UserViewModel
+    {
+        public UserHistory()
+        {
+            Logs = new List<Log>();
+        }
+
+        public IList<Log> Logs { get; set; }
     }
 }

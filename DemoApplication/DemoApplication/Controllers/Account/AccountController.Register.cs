@@ -1,63 +1,96 @@
+#region credits
+// ***********************************************************************
+// Assembly	: DemoApplication
+// Author	: Rod Johnson
+// Created	: 02-24-2013
+// 
+// Last Modified By : Rod Johnson
+// Last Modified On : 03-28-2013
+// ***********************************************************************
+#endregion
 namespace DemoApplication.Controllers.Account
 {
+    #region
+
+    using System.ComponentModel.DataAnnotations;
     using System.Web.Mvc;
     using Core.Common.Membership;
-    using Core.Common.Membership.Events;
-    using Core.Model;
-    using Extensions;
+    using Extensions.ModelStateHelpers;
     using Filters;
-    using Infrastructure.Eventing;
-    using Models;
-    using Omu.ValueInjecter;
+    using Models.Account;
+    using Security.Authorization;
 
+    #endregion
+
+    /// <summary>
+    /// Class AccountController
+    /// </summary>
     public partial class AccountController
     {
-        [AllowAnonymous, OnlyAnonymous]
+        /// <summary>
+        /// Registration form.
+        /// </summary>
+        /// <returns>ActionResult.</returns>
+        [AllowAnonymous, OnlyAnonymous, ShowMainMenu(false)]
         public ActionResult Register()
         {
             return View(new RegisterModel());
         }
 
-        [HttpPost, AllowAnonymous, OnlyAnonymous]
+        /// <summary>
+        /// Registration form.
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <returns>ActionResult.</returns>
+        [HttpPost, AllowAnonymous, OnlyAnonymous, ShowMainMenu(false)]
         public ActionResult Register(RegisterModel model)
         {
             if (ModelState.IsValid)
             {
-                var user = new User();
-
-                user.InjectFrom<UnflatLoopValueInjection>(model);
-                user.ShowWelcomePage = true;
-
-                CreateUserStatus createStatus = _userService.CreateUser(user);
-
-                if (createStatus == CreateUserStatus.Success)
+                try
                 {
-                    _authenticationService.SetAuthCookie(model.Username, true);
+                    var user = _userService.CreateAccount(model.Username, model.Password, model.Email,model.FirstName, model.LastName, model.PhoneNumber, model.Address);
+                    if (ModelState.Process(user))
+                    {
+                        new MembershipEvent(MembershipEventCode.UserCreated, user.Entity).Raise();
 
-                    MessageBus.Instance.Publish(new UserCreated(user, Url.AbsoluteAction("Logon", "Account")));
-
-                    return RedirectToAction("Index", "Dashboard");
+                        if (_membershipSettings.RequireAccountVerification)
+                        {
+                            return View("RegisterSuccess", model);
+                        }
+                        return View("RegisterConfirm", true);
+                    }                   
                 }
-
-                ModelState.AddModelError(string.Empty, ErrorCodeToString(createStatus));
+                catch (ValidationException ex)
+                {
+                    ModelState.AddModelError("", ex.Message);
+                }
             }
-
             return View(model);
         }
 
-        private static string ErrorCodeToString(CreateUserStatus createStatus)
+        /// <summary>
+        /// Confirms a new registration
+        /// </summary>
+        /// <param name="id">The id.</param>
+        /// <returns>ActionResult.</returns>
+        [AllowAnonymous, OnlyAnonymous, ShowMainMenu(false)]
+        public ActionResult Confirm(string id)
         {
-            switch (createStatus)
-            {
-                case CreateUserStatus.DuplicateUserName:
-                    return "User name already exists. Please enter a different user name.";
+            var result = _userService.VerifyAccount(id);
+            return View("RegisterConfirm", result.IsValid);
+        }
 
-                case CreateUserStatus.DuplicateEmail:
-                    return "A user name for that e-mail address already exists. Please enter a different e-mail address.";
-               
-                default:
-                    return "An unknown error occurred. Please verify your entry and try again. If the problem persists, please contact your system administrator.";
-            }
+        /// <summary>
+        /// Cancels an existing registration
+        /// </summary>
+        /// <param name="id">The id.</param>
+        /// <returns>ActionResult.</returns>
+        [AllowAnonymous, OnlyAnonymous, ShowMainMenu(false)]
+        public ActionResult Cancel(string id)
+        {
+            var result = _userService.CancelNewAccount(id);
+            return View("RegisterCancel", result);
         }
     }
 }

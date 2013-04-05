@@ -1,16 +1,3 @@
-﻿@if (TempData["Success"] != null)
-{            
-    <div class="container-fluid">
-        <div class="alert alert-success">
-            @TempData["Success"]
-        </div>
-    </div>         
-}
-@if (TempData["Error"] != null)
-{                
-    <div class="container-fluid">
-        <div class="alert alert-danger">
-            @TempData["Error"]
-        </div>
-    </div>
-}
+﻿@Html.GetAlerts(AlertType.Success, AlertLocation.Top)
+@Html.GetAlerts(AlertType.Error, AlertLocation.Top)
+@Html.GetAlerts(AlertType.Info, AlertLocation.Top)

@@ -4,13 +4,14 @@
             xsi:schemaLocation="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-3.0 MvcSiteMapSchema.xsd"
             enableLocalization="true">
 
-  <mvcSiteMapNode title="Home" controller="Home" action="Index" imageUrl="icon-home" key="root" visibility="breadcrumb">
+  <mvcSiteMapNode title="Dashboard" controller="Home" action="Index" imageUrl="icon-home" key="root" visibility="breadcrumb">
 
-    <mvcSiteMapNode title="Dashboard" controller="Dashboard" action="Index" imageUrl="icon-th-large" />
+    <mvcSiteMapNode title="About" controller="Home" action="About" imageUrl="icon-home"/>
 
     <mvcSiteMapNode title="Profile" controller="Account" action="Profile" imageUrl="icon-user" >
-      <mvcSiteMapNode title="Security" controller="Account" action="Settings" imageUrl="icon-lock"/>
+      <mvcSiteMapNode title="Change Password" controller="Account" action="ChangePassword" imageUrl="icon-lock"/>
       <mvcSiteMapNode title="Photo" controller="Account" action="Photo" imageUrl="icon-camera"/>
+      <mvcSiteMapNode title="Claims" controller="Account" action="Claims" imageUrl="icon-camera"/>
     </mvcSiteMapNode>
 
     <mvcSiteMapNode title="Components" controller="Components" action="Index" imageUrl="icon-user" >
@@ -19,12 +20,22 @@
       <mvcSiteMapNode title="CKEditor" controller="Components" action="CKEditor"/>
       <mvcSiteMapNode title="File Upload" controller="Components" action="FileUpload"/>
       <mvcSiteMapNode title="Videos" controller="Components" action="Video"/>
+      <mvcSiteMapNode title="Dropdown" controller="Components" action="DropDown"/>
+      <mvcSiteMapNode title="Editor Templates" controller="Components" action="EditorTemplates"/>
+      <mvcSiteMapNode title="Logging" controller="Components" action="Logging"/>
     </mvcSiteMapNode>
-    
+
     <mvcSiteMapNode title="Admin" controller="Home" action="Manage" imageUrl="icon-lock" key="Manage" visibility="breadcrumb">
-      <mvcSiteMapNode title="Manage Tasks" controller="Task" action="Manager" imageUrl="icon-sitemap" />
-      <mvcSiteMapNode title="Manage Users" controller="Users" action="Manager" imageUrl="icon-group">
-        <mvcSiteMapNode title="Details" controller="Users" action="Details" imageUrl="icon-user" />
+      <mvcSiteMapNode title="Manage Users" controller="Users" action="Manager" imageUrl="icon-group" key="ManageUsers">
+        <mvcSiteMapNode title="Details" controller="Users" action="Details" key="UserDetails" preservedRouteParameters="id"/>
+        <mvcSiteMapNode title="Security" controller="Users" action="Security" preservedRouteParameters="id"/>
+        <mvcSiteMapNode title="History" controller="Users" action="History" preservedRouteParameters="id"/>
+      </mvcSiteMapNode>
+      <mvcSiteMapNode title="View Logs" controller="Logging" action="Manage" key="ViewLogs">
+        <mvcSiteMapNode title="Success" controller="Logging" action="Success"/>
+        <mvcSiteMapNode title="Error" controller="Logging" action="Error" />
+        <mvcSiteMapNode title="Fatal" controller="Logging" action="Fatal" />
+        <mvcSiteMapNode title="Warn" controller="Logging" action="Warning"/>
       </mvcSiteMapNode>
     </mvcSiteMapNode>
 

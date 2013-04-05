@@ -1,47 +1,67 @@
+#region credits
+// ***********************************************************************
+// Assembly	: DemoApplication
+// Author	: Rod Johnson
+// Created	: 02-24-2013
+// 
+// Last Modified By : Rod Johnson
+// Last Modified On : 03-28-2013
+// ***********************************************************************
+#endregion
 namespace DemoApplication.Controllers.Account
 {
+    #region
+
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Web.Mvc;
-    using Core.Model;
-    using Extensions;
-    using Models;
+    using Extensions.ModelStateHelpers;
+    using Extensions.TempDataHelpers;
+    using Infrastructure.Profiles;
+    using Models.Account;
     using Omu.ValueInjecter;
 
+    #endregion
+
+    /// <summary>
+    /// Class AccountController
+    /// </summary>
     public partial class AccountController
     {
+        /// <summary>
+        /// Profiles this instance.
+        /// </summary>
+        /// <returns>ActionResult.</returns>
         [HttpGet]
         public new ActionResult Profile()
         {
             var model = new ProfileModel();
 
-            model.InjectFrom<UnflatLoopValueInjection>(this.GetCurrentUser());
+            model.InjectFrom<UnflatLoopValueInjection>(UserProfile.Current);
 
             return View(model);
         }
 
+        /// <summary>
+        /// Profiles the specified model.
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <returns>ActionResult.</returns>
         [HttpPost]
         public new ActionResult Profile(ProfileModel model)
         {
             if (ModelState.IsValid)
             {
-                if (string.Compare(this.GetCurrentUser().Email, model.Email, StringComparison.InvariantCultureIgnoreCase) != 0)
-                {
-                    var inUse = _userService.Find(u => u.Email == model.Email).Any();
-                    if (inUse)
-                    {
-                        ModelState.AddModelError("EmailInUse", "Email already in use");
-                    }
-                }
-
-                this.GetCurrentUser().InjectFrom<UnflatLoopValueInjection>(model);
+                UserProfile.Current.InjectFrom<UnflatLoopValueInjection>(model);
 
                 try
                 {
-					_userService.SaveOrUpdate(this.GetCurrentUser());
-                    TempData["Success"] = "User was successfully updated.";
-                    return RedirectToAction("Profile");
+                    var result = _userService.SaveOrUpdate(UserProfile.Current);
+
+                    if (ModelState.Process(result))
+                    {
+                        TempData.AddSuccessMessage("User was successfully updated.");
+                        return RedirectToAction("Profile");
+                    }                    
                 }
                 catch (Exception)
                 {
@@ -51,30 +71,5 @@ namespace DemoApplication.Controllers.Account
 
             return View(model);
         }
-
-        [HttpGet]
-        public ActionResult Emails()
-        {
-            var user = this.GetCurrentUser();
-
-            List<UserEmail> model = _userEmailService.Find(x => x.UserId == user.Id).ToList();
-
-            ViewBag.DefaultEmail = this.GetCurrentUser().Email;
-
-            return View(model);
-        }
-
-        [HttpPost]
-        public ActionResult Emails(UserEmail model)
-        {
-            model.UserId = this.GetCurrentUser().Id;
-            if (ModelState.IsValid)
-            {
-                _userEmailService.SaveOrUpdate(model);
-                TempData["Success"] = "Email was successfully added";
-            }
-
-            return RedirectToAction("Emails");
-        }       
     }
 }

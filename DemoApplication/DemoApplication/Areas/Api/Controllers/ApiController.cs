@@ -1,5 +1,17 @@
+#region credits
+// ***********************************************************************
+// Assembly	: DemoApplication
+// Author	: Rod Johnson
+// Created	: 02-24-2013
+// 
+// Last Modified By : Rod Johnson
+// Last Modified On : 03-28-2013
+// ***********************************************************************
+#endregion
 namespace DemoApplication.Areas.Api.Controllers
 {
+    #region
+
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -8,6 +20,9 @@ namespace DemoApplication.Areas.Api.Controllers
     using System.Web.Http;
     using Core.Interfaces.Service;
     using Core.Model;
+    using Extensions.ModelStateHelpers;
+
+    #endregion
 
     public abstract class ApiController<T> : ApiController where T : DomainObject
     {
@@ -40,11 +55,15 @@ namespace DemoApplication.Areas.Api.Controllers
         {
             if (ModelState.IsValid)
             {
-                Service.SaveOrUpdate(entity);
-                var response = new HttpResponseMessage(HttpStatusCode.Created);
-                string uri = Url.Link("DefaultApi", new { id = entity.Id });
-                response.Headers.Location = new Uri(uri);
-                return Get(entity.Id);    
+                var result = Service.SaveOrUpdate(entity);
+
+                if (ModelState.Process(result))
+                {
+                    var response = new HttpResponseMessage(HttpStatusCode.Created);
+                    string uri = Url.Link("DefaultApi", new { id = entity.Id });
+                    response.Headers.Location = new Uri(uri);
+                    return Get(entity.Id);    
+                }
             }
 
             return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);

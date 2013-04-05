@@ -1,6 +1,20 @@
+#region credits
+// ***********************************************************************
+// Assembly	: DemoApplication.Core
+// Author	: Rod Johnson
+// Created	: 02-24-2013
+// 
+// Last Modified By : Rod Johnson
+// Last Modified On : 03-28-2013
+// ***********************************************************************
+#endregion
 namespace DemoApplication.Core.Common.Photos
 {
-    using Configuration.Photos;
+    #region
+
+    using Interfaces.Photos;
+
+    #endregion
 
     /// <summary>
     /// The photo resize.
@@ -28,7 +42,7 @@ namespace DemoApplication.Core.Common.Photos
         /// <param name="element">
         /// The element.
         /// </param>
-        public PhotoResize(PhotoResizeElement element)
+        public PhotoResize(IPhotoResize element)
         {
             Name = element.Name;
             Width = element.Width;

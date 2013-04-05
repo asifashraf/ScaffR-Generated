@@ -1,8 +1,22 @@
+#region credits
+// ***********************************************************************
+// Assembly	: DemoApplication
+// Author	: Rod Johnson
+// Created	: 03-04-2013
+// 
+// Last Modified By : Rod Johnson
+// Last Modified On : 03-28-2013
+// ***********************************************************************
+#endregion
 namespace DemoApplication.Models.Sitemap
 {
+    #region
+
     using System.Collections;
     using System.Collections.Generic;
     using MvcSiteMapProvider.Web.Html.Models;
+
+    #endregion
 
     public partial class SitemapHelperModel : IEnumerable<SiteMapNodeModel>
     {
@@ -24,16 +38,16 @@ namespace DemoApplication.Models.Sitemap
         }
     }
 
-    public partial class MainMenuSitemapHelperModel : IEnumerable<CustomNodeModel>
+    public partial class MainMenuSitemapHelperModel : IEnumerable<SiteMapNodeModel>
     {
         public MainMenuSitemapHelperModel()
         {
-            Nodes = new List<CustomNodeModel>();
+            Nodes = new List<SiteMapNodeModel>();
         }
 
-        public List<CustomNodeModel> Nodes { get; set; }
+        public List<SiteMapNodeModel> Nodes { get; set; }
 
-        public IEnumerator<CustomNodeModel> GetEnumerator()
+        public IEnumerator<SiteMapNodeModel> GetEnumerator()
         {
             return Nodes.GetEnumerator();
         }

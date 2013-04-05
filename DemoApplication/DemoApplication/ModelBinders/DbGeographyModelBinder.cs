@@ -1,9 +1,23 @@
-﻿namespace DemoApplication.ModelBinders
+﻿#region credits
+// ***********************************************************************
+// Assembly	: DemoApplication
+// Author	: Rod Johnson
+// Created	: 03-04-2013
+// 
+// Last Modified By : Rod Johnson
+// Last Modified On : 03-28-2013
+// ***********************************************************************
+#endregion
+namespace DemoApplication.ModelBinders
 {
+    #region
+
     using System;
     using System.Data.Spatial;
     using System.Web.ModelBinding;
     using System.Web.Mvc;
+
+    #endregion
 
     public class DbGeographyModelBinder : System.Web.Mvc.IModelBinder, System.Web.ModelBinding.IModelBinder
     {

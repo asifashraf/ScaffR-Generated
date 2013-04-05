@@ -1,5 +1,17 @@
+#region credits
+// ***********************************************************************
+// Assembly	: DemoApplication.Core
+// Author	: Rod Johnson
+// Created	: 02-24-2013
+// 
+// Last Modified By : Rod Johnson
+// Last Modified On : 03-28-2013
+// ***********************************************************************
+#endregion
 namespace DemoApplication.Core.Interfaces.Service
 {
+    #region
+
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -7,6 +19,8 @@ namespace DemoApplication.Core.Interfaces.Service
     using System.ServiceModel;
     using Paging;
     using Validation;
+
+    #endregion
 
     [ServiceContract]
     public interface IService<T>
@@ -27,9 +41,18 @@ namespace DemoApplication.Core.Interfaces.Service
         void Delete(T entity);
 
         [OperationContract]
+        void BulkDelete(List<int> keys);
+
+        [OperationContract]
         IEnumerable<T> Find(Expression<Func<T, bool>> expression, int maxHits = 100);
 
         [OperationContract]
         IPage<T> Page(int page = 1, int pageSize = 10);
+
+        [OperationContract]
+        long Count();
+
+        [OperationContract]
+        long Count(Expression<Func<T, bool>> expression);
     }
 }
