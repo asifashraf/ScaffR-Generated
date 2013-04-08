@@ -16,12 +16,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@Html.GetPageTitle()</title>
     @Bundles.RenderStylesheets()
+
+
+    <link href="~/Scripts/jquery.alerts/jquery.alerts.css" rel="stylesheet" />
+
+
     @Bundles.RenderScripts("head")
+
+    
 </head>
 <body class="@ViewBag.BodyClass">
     @Html.Partial("_Modal")
     @RenderBody()
 
     @Bundles.RenderScripts()
+
+    @*Asif submit*@
+    
+    <script src="~/Scripts/jquery.alerts/jquery.alerts.js"></script>
+    <script src="~/Scripts/noty/jquery.noty.js"></script>
+    <script src="~/Scripts/noty/promise.js"></script>
+    <script src="~/Scripts/noty/layouts/bottomRight.js"></script>
+    <script src="~/Scripts/noty/themes/default.js"></script>
+    <script src="~/Scripts/misc/jquery.numeric.js"></script>
+    <script src="~/Scripts/misc/jquery.extensions.js"></script>
+    <script src="~/Scripts/jquery.validation.extensions/adapters.js"></script>
+    <script src="~/Scripts/misc/jquery.showLoading.js"></script>
+    <script src="~/Scripts/ajax-submit/ajax-form-submit.js"></script>
+    <script src="~/Scripts/ajax-submit/ajax-form-response-handlers.js"></script>
+
 </body>
 </html>

@@ -30,7 +30,7 @@ namespace DemoApplication.Controllers.Account
         /// Authenticate user.
         /// </summary>
         /// <returns>ActionResult.</returns>
-        [AllowAnonymous, OnlyAnonymous, ShowMainMenu(false)]
+        [AllowAnonymous, OnlyAnonymous, ShowMainMenu(false), HttpGet]
         public ActionResult Login()
         {
             return View(new LoginModel());
@@ -44,7 +44,7 @@ namespace DemoApplication.Controllers.Account
         /// <returns>ActionResult.</returns>
         [HttpPost]
         [AllowAnonymous, OnlyAnonymous, ShowMainMenu(false)]
-        public ActionResult Login(LoginModel model, string returnUrl)
+        public JsonResult LoginPost(LoginModel model, string returnUrl)
         {
             if (ModelState.IsValid)
             {
@@ -57,21 +57,24 @@ namespace DemoApplication.Controllers.Account
 
                     if (_userService.IsPasswordExpired(model.UserName))
                     {
-                        return RedirectToAction("ChangePassword", "Account");
+                        return FormatJson(WebAreas.Lib.Web.ResultType.redirect, "/Account/ChangePassword");
                     }
 
                     new MembershipEvent(MembershipEventCode.UserLogin, user).Raise();
 
                     if (Url.IsLocalUrl(model.ReturnUrl))
                     {
-                        return Redirect(model.ReturnUrl);
+                        return FormatJson(WebAreas.Lib.Web.ResultType.redirect, model.ReturnUrl);
                     }
-                    return RedirectToAction("Index", "Home");
+                    return FormatJson(WebAreas.Lib.Web.ResultType.redirect, "/Home/Index");
                 }
-               
-                ModelState.AddModelError("", "Invalid Username or Password");
+
+                return FormatJson(WebAreas.Lib.Web.ResultType.failure, "Invalid Username or Password");
             }
-            return View(model);
+            else
+            {
+                return FormatJson(WebAreas.Lib.Web.ResultType.validationerrors, "There are validation errors", ModelState.Errors());
+            }            
         }
     }
 }

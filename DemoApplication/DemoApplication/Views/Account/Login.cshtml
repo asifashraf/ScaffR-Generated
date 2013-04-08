@@ -6,7 +6,7 @@
 
 <div id="login">
     <h3>Login</h3>
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("LoginPost", "Account", FormMethod.Post, new { @class = "ajax-submit" }))
     {
         @Html.ValidationSummary(true, "", new { @class = "alert alert-block alert-error" })
            

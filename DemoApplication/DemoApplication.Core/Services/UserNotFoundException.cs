@@ -18,5 +18,12 @@ namespace DemoApplication.Core.Services
 
     public class UserNotFoundException : Exception
     {
+        public override string Message
+        {
+            get
+            {
+                return "User not found";
+            }
+        }
     }
 }

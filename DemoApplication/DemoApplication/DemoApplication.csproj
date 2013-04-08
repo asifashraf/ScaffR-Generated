@@ -32,6 +32,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <UseVSHostingProcess>true</UseVSHostingProcess>
+    <PackageAsSingleFile>false</PackageAsSingleFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -387,6 +388,9 @@
     <Content Include="Content\font\proximanova-webfont.ttf" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Images\loading.gif" />
+    <Content Include="Scripts\ajax-submit\ajax-form-response-handlers.js" />
+    <Content Include="Scripts\ajax-submit\ajax-form-submit.js" />
     <Content Include="Scripts\custom\bundle.txt" />
     <Content Include="Scripts\custom\custom.js" />
     <Content Include="Scripts\global.address.js" />
@@ -397,6 +401,12 @@
     <Content Include="Scripts\global.modal.js" />
     <Content Include="Scripts\global.validation.js" />
     <Content Include="Scripts\global.widgets.js" />
+    <Content Include="Scripts\jquery.alerts\images\help.gif" />
+    <Content Include="Scripts\jquery.alerts\images\important.gif" />
+    <Content Include="Scripts\jquery.alerts\images\info.gif" />
+    <Content Include="Scripts\jquery.alerts\jquery.alerts.css" />
+    <Content Include="Scripts\jquery.alerts\jquery.alerts.js" />
+    <Content Include="Scripts\jquery.validation.extensions\adapters.js" />
     <Content Include="Scripts\lib\bootstrap\bootstrap.js" />
     <Content Include="Scripts\lib\bootstrap\bundle.txt" />
     <Content Include="Scripts\lib\bundle.txt">
@@ -607,6 +617,24 @@
     <Content Include="Scripts\lib\jquery\jquery.validate.js" />
     <Content Include="Scripts\lib\jquery\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\lib\jquery\json2.js" />
+    <Content Include="Scripts\misc\jquery.extensions.js" />
+    <Content Include="Scripts\misc\jquery.numeric.js" />
+    <Content Include="Scripts\misc\jquery.showLoading.js" />
+    <Content Include="Scripts\noty\jquery.noty.js" />
+    <Content Include="Scripts\noty\layouts\bottom.js" />
+    <Content Include="Scripts\noty\layouts\bottomCenter.js" />
+    <Content Include="Scripts\noty\layouts\bottomLeft.js" />
+    <Content Include="Scripts\noty\layouts\bottomRight.js" />
+    <Content Include="Scripts\noty\layouts\center.js" />
+    <Content Include="Scripts\noty\layouts\centerLeft.js" />
+    <Content Include="Scripts\noty\layouts\centerRight.js" />
+    <Content Include="Scripts\noty\layouts\inline.js" />
+    <Content Include="Scripts\noty\layouts\top.js" />
+    <Content Include="Scripts\noty\layouts\topCenter.js" />
+    <Content Include="Scripts\noty\layouts\topLeft.js" />
+    <Content Include="Scripts\noty\layouts\topRight.js" />
+    <Content Include="Scripts\noty\promise.js" />
+    <Content Include="Scripts\noty\themes\default.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -623,7 +651,9 @@
     <Folder Include="Content\images\Thumbnail\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="packages.config" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\EditorTemplates\Year.cshtml" />
@@ -762,6 +792,14 @@
     <Content Include="CodeTemplates\Scaffolders\ScaffR.Core\CoreSection.cs.t4" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\areas\Areas.DotNetExtensions\Areas.DotNetExtensions.csproj">
+      <Project>{891bc139-7f80-41be-8af8-f0d400a6068b}</Project>
+      <Name>Areas.DotNetExtensions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\areas\Areas.Lib\Areas.Lib.csproj">
+      <Project>{741d32ff-7f8e-4db5-9415-5f4acfa55c41}</Project>
+      <Name>Areas.Lib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DemoApplication.Common\DemoApplication.Common.csproj">
       <Project>{c6f67818-d5ac-4fa0-9325-186aeef0f01b}</Project>
       <Name>DemoApplication.Common</Name>

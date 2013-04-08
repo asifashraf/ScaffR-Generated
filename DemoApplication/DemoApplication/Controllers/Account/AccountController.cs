@@ -17,11 +17,12 @@ namespace DemoApplication.Controllers.Account
     using Core.Interfaces.Membership;
     using Core.Interfaces.Service;
     using Filters;
+    using WebAreas.Lib.Web;
 
     #endregion
 
     [ShowBreadcrumb(false)]
-    public partial class AccountController : Controller
+    public partial class AccountController : BaseController
     {
         private readonly IUserAccountService _userService;
 
